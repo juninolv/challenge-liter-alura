@@ -2,14 +2,12 @@ package com.oracle.cli.view;
 
 import com.oracle.cli.model.ScreenSelector;
 import com.oracle.cli.util.exception.ExitException;
+import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNull;
 
+@AllArgsConstructor
 public abstract class ScreenBase {
     protected String title;
-
-    protected ScreenBase(String title) {
-        this.title = title;
-    }
 
     public abstract boolean filter(ScreenSelector selector);
     protected abstract void render(StringBuilder builder);

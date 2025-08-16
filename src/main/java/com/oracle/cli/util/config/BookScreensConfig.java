@@ -4,9 +4,11 @@ import com.oracle.cli.model.ScreenSelector;
 import com.oracle.cli.service.ScreenService;
 import com.oracle.cli.view.book.*;
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@AllArgsConstructor
 public class BookScreensConfig {
     private final ScreenService service;
     private final BookMostDownloadView mostDownload;
@@ -14,22 +16,6 @@ public class BookScreensConfig {
     private final BooksByLanguageView byLanguage;
     private final BooksBySubjectView bySubject;
     private final BooksView home;
-
-    public BookScreensConfig(
-        ScreenService service,
-        BookMostDownloadView mostDownload,
-        BooksAllView all,
-        BooksByLanguageView byLanguage,
-        BooksBySubjectView bySubject,
-        BooksView home
-    ) {
-        this.service = service;
-        this.mostDownload = mostDownload;
-        this.all = all;
-        this.byLanguage = byLanguage;
-        this.bySubject = bySubject;
-        this.home = home;
-    }
 
     @PostConstruct
     public void setupScreens() {

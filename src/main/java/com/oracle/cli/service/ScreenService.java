@@ -29,12 +29,16 @@ public class ScreenService {
         return screen.filter(selector);
     }
 
-    public void print(Object screen) {
-        System.out.print(screen);
+    public void print(Object value) {
+        System.out.print(value);
     }
 
     public void println(Object value) {
         System.out.println(value);
+    }
+
+    public void printf(String value, Object... values) {
+        System.out.printf(value, values);
     }
 
     public void skip() {

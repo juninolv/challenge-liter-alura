@@ -25,7 +25,11 @@ public class BooksView extends ScreenBase {
 
         return switch (option){
             case HOME, EXIT -> true;
-            case BOOKS_ALL, BOOKS_MOST_DOWN, BOOKS_LANGUAGE, BOOKS_SUBJECT ->
+            case
+                BOOKS_ALL,
+                BOOKS_MOST_DOWN,
+                BOOKS_LANGUAGE,
+                BOOKS_SUBJECT ->
                 service.show(option);
             default -> false;
         };

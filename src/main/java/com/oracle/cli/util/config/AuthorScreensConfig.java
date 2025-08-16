@@ -4,9 +4,11 @@ import com.oracle.cli.model.ScreenSelector;
 import com.oracle.cli.service.ScreenService;
 import com.oracle.cli.view.author.*;
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@AllArgsConstructor
 public class AuthorScreensConfig {
     private final ScreenService service;
     private final AuthorsView home;
@@ -14,22 +16,6 @@ public class AuthorScreensConfig {
     private final AuthorsAllView all;
     private final AuthorsAllLivingView allLiving;
     private final AuthorsAllDeadView allDead;
-
-    public AuthorScreensConfig(
-        ScreenService service,
-        AuthorsView home,
-        AuthorsByNameView byName,
-        AuthorsAllView all,
-        AuthorsAllLivingView allLiving,
-        AuthorsAllDeadView allDead
-    ) {
-        this.service = service;
-        this.home = home;
-        this.byName = byName;
-        this.all = all;
-        this.allLiving = allLiving;
-        this.allDead = allDead;
-    }
 
     @PostConstruct
     public void setupScreens() {
