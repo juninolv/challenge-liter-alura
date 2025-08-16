@@ -39,8 +39,8 @@ public class BookMostDownloadView extends ScreenBase {
         builder.append("\n# Checking Database...");
     }
 
-    private void showResult(List<BookDto> data) {
-        if (data == null) {
+    private void showResult(@NonNull List<BookDto> data) {
+        if (data.isEmpty()) {
             screenService.println("\n# No data found!");
             return;
         }
