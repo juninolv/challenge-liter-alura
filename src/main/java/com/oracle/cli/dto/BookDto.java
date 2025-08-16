@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BookDto(
@@ -27,5 +28,13 @@ public record BookDto(
     @NonNull
     public static String join(List<String> values) {
         return String.join(", ", values);
+    }
+
+    @NonNull
+    public String joinAuthor() {
+        return authors
+            .stream()
+            .map(AuthorDto::name)
+            .collect(Collectors.joining(" | "));
     }
 }

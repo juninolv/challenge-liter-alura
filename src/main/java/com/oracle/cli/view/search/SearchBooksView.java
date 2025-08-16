@@ -1,7 +1,6 @@
 package com.oracle.cli.view.search;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.oracle.cli.dto.AuthorDto;
 import com.oracle.cli.dto.BookDto;
 import com.oracle.cli.dto.BookResDto;
 import com.oracle.cli.model.ScreenSelector;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 @Component
 public class SearchBooksView extends ScreenBase {
@@ -93,13 +91,8 @@ public class SearchBooksView extends ScreenBase {
             return;
         }
 
-        String authors = data.authors()
-            .stream()
-            .map(AuthorDto::name)
-            .collect(Collectors.joining(" | "));
-
         screenService.printf("%n# Title: %s", data.title());
-        screenService.printf("%n# Author's: %s", authors);
+        screenService.printf("%n# Author's: %s", data.joinAuthor());
         screenService.printf("%n# Languages: %s", data.languages());
         screenService.printf("%n# Downloads: %s%n", data.downloads());
     }

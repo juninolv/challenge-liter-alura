@@ -26,10 +26,7 @@ public class HomeView extends ScreenBase {
         return switch (option){
             case HOME -> true;
             case
-                SEARCH_BOOK,
-                STATISTICS,
-                BOOKS,
-                AUTHORS ->
+                SEARCH_BOOK, STATISTICS, BOOKS, AUTHORS ->
                 service.show(option);
             default -> false;
         };

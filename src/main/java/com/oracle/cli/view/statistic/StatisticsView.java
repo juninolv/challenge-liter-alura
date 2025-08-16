@@ -25,7 +25,8 @@ public class StatisticsView extends ScreenBase {
 
         return switch (option){
             case HOME, EXIT -> true;
-            case STATISTICS_BOOK_DOWNLOAD, STATISTICS_AUTHORS_LIFE ->
+            case
+                STATISTICS_BOOK_DOWNLOAD, STATISTICS_AUTHORS_LIFE ->
                 service.show(option);
             default -> false;
         };

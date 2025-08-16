@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class BookService {
@@ -21,6 +23,14 @@ public class BookService {
         Book entity = repository.saveAndFlush(mapper.toEntity(dto));
 
         return mapper.toDto(entity);
+    }
+
+    public List<BookDto> readAll() {
+        return repository
+            .findAll()
+            .stream()
+            .map(mapper::toDto)
+            .toList();
     }
 
     public BookDto readIfExistsByTitle(String title) {

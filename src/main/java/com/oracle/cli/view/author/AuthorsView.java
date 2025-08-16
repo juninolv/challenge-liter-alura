@@ -26,10 +26,7 @@ public class AuthorsView extends ScreenBase {
         return switch (option){
             case HOME, EXIT -> true;
             case
-                AUTHORS_ALL,
-                AUTHORS_ALL_LIVING,
-                AUTHORS_ALL_DEAD,
-                AUTHORS_NAME ->
+                AUTHORS_ALL, AUTHORS_ALL_LIVING, AUTHORS_ALL_DEAD, AUTHORS_NAME ->
                 service.show(option);
             default -> false;
         };
