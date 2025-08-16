@@ -1,5 +1,6 @@
 package com.oracle.cli.view.search;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.cli.dto.AuthorDto;
 import com.oracle.cli.dto.BookDto;
 import com.oracle.cli.dto.BookResDto;
@@ -13,6 +14,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @Component
@@ -50,14 +52,23 @@ public class SearchBooksView extends ScreenBase {
                 return true;
             }
 
-            screenService.println("\n# Not found on Database.\n\n# Fetching...");
+            screenService.println("\n# Not found on Database\n\n# Fetching...");
             BookResDto data = searchService.search(title);
-            result = bookService.create(data);
 
+            if (data == null) {
+                screenService.println("\n# Not found");
+                return true;
+            }
+
+            result = bookService.create(data);
             showResult(result);
             return true;
         } catch (ExitException exception) {
             screenService.println("\n# Leaving...");
+            return true;
+        } catch (ExecutionException | InterruptedException | JsonProcessingException exception) {
+            System.out.println("\n# Server offline or invalid resource. Leaving...");
+            Thread.currentThread().interrupt();
         }
 
         return false;

@@ -25,7 +25,7 @@ public class SearchBookService {
         this.mapper = mapper;
     }
 
-    public BookResDto search(String title) {
+    public BookResDto search(String title) throws ExecutionException, InterruptedException, JsonProcessingException {
         ArrayNode data = this.sendRequest(this.buildUri(title));
 
         return this.processRequest(data, title);
@@ -37,15 +37,8 @@ public class SearchBookService {
     }
 
     @NonNull
-    private ArrayNode sendRequest(String uri) {
-        ArrayNode result = null;
-
-        try {
-            result = mapper.toArrayNode(Http.get(uri), "results");
-        } catch (ExecutionException | InterruptedException | JsonProcessingException exception) {
-            System.out.println("\n# Server offline or invalid resource. Leaving...");
-            Thread.currentThread().interrupt();
-        }
+    private ArrayNode sendRequest(String uri) throws ExecutionException, InterruptedException, JsonProcessingException {
+        ArrayNode result = mapper.toArrayNode(Http.get(uri), "results");
 
         if (result == null) {
             throw new ExitException("Invalid Request");
