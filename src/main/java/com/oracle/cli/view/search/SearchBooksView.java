@@ -1,7 +1,10 @@
 package com.oracle.cli.view.search;
 
+import com.oracle.cli.dto.AuthorDto;
+import com.oracle.cli.dto.BookDto;
 import com.oracle.cli.dto.BookResDto;
 import com.oracle.cli.model.ScreenSelector;
+import com.oracle.cli.service.BookService;
 import com.oracle.cli.service.ScreenService;
 import com.oracle.cli.service.SearchBookService;
 import com.oracle.cli.util.exception.ExitException;
@@ -10,21 +13,25 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Component
 public class SearchBooksView extends ScreenBase {
     private final Scanner input;
     private final ScreenService screenService;
     private final SearchBookService searchService;
+    private final BookService bookService;
 
     protected SearchBooksView(
         ScreenService screenService,
         SearchBookService searchService,
+        BookService bookService,
         Scanner input
     ) {
         super("SEARCH BOOK - HOME");
         this.screenService = screenService;
         this.searchService = searchService;
+        this.bookService = bookService;
         this.input = input;
     }
 
@@ -35,18 +42,25 @@ public class SearchBooksView extends ScreenBase {
 
         try {
             String title = getTitle();
-            screenService.println("\n# Fetching...");
+            screenService.println("\n# Checking Database...");
+            BookDto result = bookService.readIfExistsByTitle(title);
 
+            if (result != null) {
+                showResult(result);
+                return true;
+            }
+
+            screenService.println("\n# Not found on Database.\n\n# Fetching...");
             BookResDto data = searchService.search(title);
+            result = bookService.create(data);
 
-            // code here for persistence on database
-
-            showResult(data);
+            showResult(result);
+            return true;
         } catch (ExitException exception) {
             screenService.println("\n# Leaving...");
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -62,16 +76,20 @@ public class SearchBooksView extends ScreenBase {
         return value;
     }
 
-    private void showResult(BookResDto data) {
+    private void showResult(BookDto data) {
         if (data == null) {
             screenService.println("\n# No data found!");
             return;
         }
 
+        String authors = data.authors()
+            .stream()
+            .map(AuthorDto::name)
+            .collect(Collectors.joining(" | "));
+
         screenService.printf("%n# Title: %s", data.title());
-        screenService.printf("%n# Author's: %s", data.authors());
+        screenService.printf("%n# Author's: %s", authors);
         screenService.printf("%n# Languages: %s", data.languages());
-        screenService.printf("%n# Downloads: %s", data.downloads());
-        screenService.skip();
+        screenService.printf("%n# Downloads: %s%n", data.downloads());
     }
 }

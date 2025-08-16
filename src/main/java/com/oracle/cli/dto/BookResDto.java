@@ -14,7 +14,7 @@ public record BookResDto(
     Integer downloads,
 
     @JsonAlias("authors")
-    List<AuthorResDto> authors,
+    List<AuthorDto> authors,
 
     @JsonAlias("languages")
     List<String> languages,
