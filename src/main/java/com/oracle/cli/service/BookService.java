@@ -46,10 +46,18 @@ public class BookService {
 
     public List<BookDto> readByLanguage(String language) {
         return repository
-            .findAllByLanguagesContains(language)
+            .findAllByLanguages(language)
             .stream()
             .map(mapper::toDto)
             .toList();
+    }
+
+    public List<BookDto> readBySubject(String subject) {
+        return repository
+                .findAllBySubjects(subject)
+                .stream()
+                .map(mapper::toDto)
+                .toList();
     }
 
     public BookDto readIfExistsByTitle(String title) {

@@ -38,21 +38,21 @@ public class BooksByLanguageView extends ScreenBase {
             String language = getLanguageCode();
             screenService.println("\n# Checking Database...");
             showResult(bookService.readByLanguage(language));
+
+            return true;
         } catch (ExitException exception) {
             screenService.println("\n# Leaving...");
             return true;
         } catch (RuntimeException exception) {
             screenService.println("\n# Leaving...");
-            return false;
         }
 
-        return true;
+        return false;
     }
 
     @Override
     protected void render(@NonNull StringBuilder builder) {
-        builder
-            .append("# 0 - Exit\n");
+        builder.append("# 0 - Exit\n");
     }
 
     @NonNull
@@ -63,7 +63,6 @@ public class BooksByLanguageView extends ScreenBase {
 
         return value;
     }
-
 
     private void showResult(@NonNull List<BookDto> data) {
         if (data.isEmpty()) {
