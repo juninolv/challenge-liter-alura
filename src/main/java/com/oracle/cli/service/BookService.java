@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -29,6 +30,16 @@ public class BookService {
         return repository
             .findAll()
             .stream()
+            .map(mapper::toDto)
+            .toList();
+    }
+
+    public List<BookDto> readMostDownload() {
+        return repository
+            .findAll()
+            .stream()
+            .sorted(Comparator.comparing(Book::getDownloads).reversed())
+            .limit(10)
             .map(mapper::toDto)
             .toList();
     }

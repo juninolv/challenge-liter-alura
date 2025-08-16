@@ -15,7 +15,10 @@ public class BooksAllView extends ScreenBase {
     private final ScreenService screenService;
     private final BookService bookService;
 
-    protected BooksAllView(ScreenService screenService, BookService bookService) {
+    protected BooksAllView(
+        ScreenService screenService,
+        BookService bookService
+    ) {
         super("BOOKS - FIND ALL");
         this.screenService = screenService;
         this.bookService = bookService;
