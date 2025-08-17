@@ -1,0 +1,10 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWD}
+    ports:
+      - "5435:5432"

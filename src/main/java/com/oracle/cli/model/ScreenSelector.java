@@ -1,0 +1,20 @@
+package com.oracle.cli.model;
+
+public enum ScreenSelector {
+    HOME,
+    SEARCH_BOOK,
+    STATISTICS,
+    STATISTICS_BOOK_DOWNLOAD,
+    STATISTICS_AUTHORS_LIFE,
+    BOOKS,
+    BOOKS_ALL,
+    BOOKS_MOST_DOWN,
+    BOOKS_LANGUAGE,
+    BOOKS_SUBJECT,
+    AUTHORS,
+    AUTHORS_ALL,
+    AUTHORS_ALL_LIVING,
+    AUTHORS_ALL_DEAD,
+    AUTHORS_NAME,
+    EXIT
+}
