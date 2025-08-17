@@ -35,10 +35,10 @@ public class HomeView extends ScreenBase {
     @Override
     protected void render(@NonNull StringBuilder builder) {
         builder
+            .append("#\n")
             .append("# 1 - Search Books\n")
-            .append("# 2 - Statistics\n")
-            .append("# 3 - Books\n")
-            .append("# 4 - Authors\n")
+            .append("# 2 - Books\n")
+            .append("# 3 - Authors\n")
             .append("# 0 - Exit\n")
             .append("#\n# -> ");
     }
@@ -48,9 +48,8 @@ public class HomeView extends ScreenBase {
 
         return switch (action){
             case 1 -> ScreenSelector.SEARCH_BOOK;
-            case 2 -> ScreenSelector.STATISTICS;
-            case 3 -> ScreenSelector.BOOKS;
-            case 4 -> ScreenSelector.AUTHORS;
+            case 2 -> ScreenSelector.BOOKS;
+            case 3 -> ScreenSelector.AUTHORS;
             case 0 -> {
                 service.println("\n# Leaving...\n");
                 yield ScreenSelector.EXIT;

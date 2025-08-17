@@ -52,7 +52,7 @@ public class BooksByLanguageView extends ScreenBase {
 
     @Override
     protected void render(@NonNull StringBuilder builder) {
-        builder.append("# 0 - Exit\n");
+        builder.append("#\n# 0 - Exit\n");
     }
 
     @NonNull

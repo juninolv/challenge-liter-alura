@@ -21,7 +21,7 @@ public abstract class ScreenBase {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n# ").append(title).append("\n#\n");
+        builder.append("\n# ").append(title).append("\n");
         render(builder);
 
         return builder.toString();

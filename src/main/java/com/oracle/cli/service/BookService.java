@@ -21,7 +21,7 @@ public class BookService {
     @Transactional
     public BookDto create(BookResDto data) {
         BookDto dto = new BookDto(data);
-        Book entity = repository.saveAndFlush(mapper.toEntity(dto));
+        Book entity = repository.save(mapper.toEntity(dto));
 
         return mapper.toDto(entity);
     }
@@ -54,10 +54,10 @@ public class BookService {
 
     public List<BookDto> readBySubject(String subject) {
         return repository
-                .findAllBySubjects(subject)
-                .stream()
-                .map(mapper::toDto)
-                .toList();
+            .findAllBySubjects(subject)
+            .stream()
+            .map(mapper::toDto)
+            .toList();
     }
 
     public BookDto readIfExistsByTitle(String title) {

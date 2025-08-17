@@ -3,6 +3,7 @@ package com.oracle.cli.view.book;
 import com.oracle.cli.model.ScreenSelector;
 import com.oracle.cli.service.ScreenService;
 import com.oracle.cli.view.ScreenBase;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -33,8 +34,9 @@ public class BooksView extends ScreenBase {
     }
 
     @Override
-    protected void render(StringBuilder builder) {
+    protected void render(@NonNull StringBuilder builder) {
         builder
+            .append("#\n")
             .append("# 1 - All\n")
             .append("# 2 - Top 10\n")
             .append("# 3 - By Language\n")

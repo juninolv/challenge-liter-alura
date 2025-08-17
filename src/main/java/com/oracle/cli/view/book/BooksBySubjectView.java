@@ -51,8 +51,8 @@ public class BooksBySubjectView extends ScreenBase {
     }
 
     @Override
-    protected void render(StringBuilder builder) {
-        builder.append("# 0 - Exit\n");
+    protected void render(@NonNull StringBuilder builder) {
+        builder.append("#\n# 0 - Exit\n");
     }
 
     @NonNull
